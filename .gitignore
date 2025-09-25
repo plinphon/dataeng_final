@@ -1,1 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual environment
+venv/
+.env/
+.venv/
+
+# Logs
 logs/
+*.log
+
+# OS files
+.DS_Store
+
+# Docker
+*.pid
+*.sock
