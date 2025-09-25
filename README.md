@@ -8,7 +8,10 @@ This project fetches football player statistics from the StatsBanger API, proces
 Architecture
 StatsBanger API → Airflow DAG → PostgreSQL → Matplotlib Visualizations
 
-Data Source: StatsBanger REST API (La Liga season statistics)
+Data Source: REST API (La Liga season statistics)
+
 Orchestration: Apache Airflow with daily scheduling
+
 Storage: PostgreSQL with Bronze-Silver-Gold layers
+
 Visualization: 7 matplotlib-based analytical functions
