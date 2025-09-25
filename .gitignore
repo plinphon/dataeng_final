@@ -16,6 +16,8 @@ logs/
 # OS files
 .DS_Store
 
+.ipynb_checkpoints/
+
 # Docker
 *.pid
 *.sock
