@@ -35,7 +35,8 @@ def create_views(engine):
         """,
         #aggregated stats by team -
         """
-        DROP VIEW IF EXISTS team_aggregates;
+        DROP TABLE IF EXISTS team_aggregates;
+
         CREATE TABLE team_aggregates AS
         SELECT 
             team_name,
