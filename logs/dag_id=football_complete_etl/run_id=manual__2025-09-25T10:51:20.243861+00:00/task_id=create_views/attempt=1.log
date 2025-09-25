@@ -1,0 +1,13 @@
+[2025-09-25T10:52:47.729+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: football_complete_etl.create_views manual__2025-09-25T10:51:20.243861+00:00 [queued]>
+[2025-09-25T10:52:47.732+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: football_complete_etl.create_views manual__2025-09-25T10:51:20.243861+00:00 [queued]>
+[2025-09-25T10:52:47.732+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-09-25T10:52:47.737+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): create_views> on 2025-09-25 10:51:20.243861+00:00
+[2025-09-25T10:52:47.740+0000] {standard_task_runner.py:57} INFO - Started process 149 to run task
+[2025-09-25T10:52:47.742+0000] {standard_task_runner.py:84} INFO - Running: ['airflow', 'tasks', 'run', 'football_complete_etl', 'create_views', 'manual__2025-09-25T10:51:20.243861+00:00', '--job-id', '75', '--raw', '--subdir', 'DAGS_FOLDER/fetch _player_stats.py', '--cfg-path', '/tmp/tmpk1qednhk']
+[2025-09-25T10:52:47.743+0000] {standard_task_runner.py:85} INFO - Job 75: Subtask create_views
+[2025-09-25T10:52:47.757+0000] {task_command.py:416} INFO - Running <TaskInstance: football_complete_etl.create_views manual__2025-09-25T10:51:20.243861+00:00 [running]> on host 1afec62875aa
+[2025-09-25T10:52:47.780+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='data_eng' AIRFLOW_CTX_DAG_ID='football_complete_etl' AIRFLOW_CTX_TASK_ID='create_views' AIRFLOW_CTX_EXECUTION_DATE='2025-09-25T10:51:20.243861+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-09-25T10:51:20.243861+00:00'
+[2025-09-25T10:52:47.791+0000] {python.py:194} INFO - Done. Returned value was: None
+[2025-09-25T10:52:47.793+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=football_complete_etl, task_id=create_views, execution_date=20250925T105120, start_date=20250925T105247, end_date=20250925T105247
+[2025-09-25T10:52:47.841+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-09-25T10:52:47.848+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check

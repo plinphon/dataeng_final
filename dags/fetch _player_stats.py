@@ -4,6 +4,7 @@ from datetime import datetime
 from sqlalchemy import create_engine
 import pandas as pd
 import create_view
+import requests
 
 default_args = {
     "owner": "data_eng",
@@ -11,10 +12,9 @@ default_args = {
     "retries": 1
 }
 
-engine = create_engine("postgresql://user:password@finalDataeng:5432/football_db")
+engine = create_engine("postgresql://user:password@finalDataeng:5432/football_db_new")
 
 def fetch_and_save_bronze():
-    import requests, pandas as pd
     API_URL = "https://statsbanger.onrender.com/api/player-season-stat"
     PARAMS = {"uniqueTournamentID": 8, "seasonID": 52376}
     resp = requests.get(API_URL, params=PARAMS)
@@ -24,7 +24,6 @@ def fetch_and_save_bronze():
     df.to_sql("player_stats_bronze", engine, if_exists="replace", index=False)
 
 def transform_bronze_to_silver():
-    import pandas as pd
     bronze_df = pd.read_sql("SELECT * FROM player_stats_bronze", engine)
     silver_df = pd.DataFrame({
         "player_id": bronze_df["player.playerId"],
@@ -81,7 +80,7 @@ def clean_silver_data():
     silver_df.to_sql("player_stats_clean", engine, if_exists="replace", index=False)
 
 
-def transform_silver_to_gold_full():
+def transform_silver_to_gold():
     silver_df = pd.read_sql("""
         SELECT 
             player_id, player_name, team_id, team_name, season_id,
@@ -120,7 +119,7 @@ def transform_silver_to_gold_full():
 
 
 
-with DAG("bronze_to_silver", default_args=default_args, schedule_interval="@daily", catchup=False) as dag:
+with DAG("football_complete_etl", default_args=default_args, schedule_interval="@daily", catchup=False) as dag:
     t1 = PythonOperator(
         task_id="fetch_bronze",
         python_callable=fetch_and_save_bronze
@@ -137,8 +136,8 @@ with DAG("bronze_to_silver", default_args=default_args, schedule_interval="@dail
     )
 
     t4 = PythonOperator(
-        task_id="transform_to_gold_full",
-        python_callable=transform_silver_to_gold_full
+        task_id="transform_to_gold",
+        python_callable=transform_silver_to_gold
     )
 
     t5 = PythonOperator(

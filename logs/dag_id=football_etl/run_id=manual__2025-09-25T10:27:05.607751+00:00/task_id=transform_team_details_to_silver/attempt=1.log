@@ -1,0 +1,23 @@
+[2025-09-25T10:32:05.673+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: football_etl.transform_team_details_to_silver manual__2025-09-25T10:27:05.607751+00:00 [queued]>
+[2025-09-25T10:32:05.675+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: football_etl.transform_team_details_to_silver manual__2025-09-25T10:27:05.607751+00:00 [queued]>
+[2025-09-25T10:32:05.675+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-09-25T10:32:05.681+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): transform_team_details_to_silver> on 2025-09-25 10:27:05.607751+00:00
+[2025-09-25T10:32:05.683+0000] {standard_task_runner.py:57} INFO - Started process 984 to run task
+[2025-09-25T10:32:05.685+0000] {standard_task_runner.py:84} INFO - Running: ['airflow', 'tasks', 'run', 'football_etl', 'transform_team_details_to_silver', 'manual__2025-09-25T10:27:05.607751+00:00', '--job-id', '65', '--raw', '--subdir', 'DAGS_FOLDER/fetch _player_stats.py', '--cfg-path', '/tmp/tmpdrq6k_nb']
+[2025-09-25T10:32:05.686+0000] {standard_task_runner.py:85} INFO - Job 65: Subtask transform_team_details_to_silver
+[2025-09-25T10:32:05.700+0000] {task_command.py:416} INFO - Running <TaskInstance: football_etl.transform_team_details_to_silver manual__2025-09-25T10:27:05.607751+00:00 [running]> on host 1afec62875aa
+[2025-09-25T10:32:05.721+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='data_eng' AIRFLOW_CTX_DAG_ID='football_etl' AIRFLOW_CTX_TASK_ID='transform_team_details_to_silver' AIRFLOW_CTX_EXECUTION_DATE='2025-09-25T10:27:05.607751+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-09-25T10:27:05.607751+00:00'
+[2025-09-25T10:32:05.740+0000] {logging_mixin.py:154} INFO - Error transforming team details: (psycopg2.errors.DependentObjectsStillExist) cannot drop table team_details because other objects depend on it
+DETAIL:  constraint fk_player_stats_team on table player_stats depends on table team_details
+constraint fk_player_stats_clean_team on table player_stats_clean depends on table team_details
+constraint fk_player_stats_gold_team on table player_stats_gold depends on table team_details
+constraint fk_player_stats_enriched_team on table player_stats_enriched depends on table team_details
+HINT:  Use DROP ... CASCADE to drop the dependent objects too.
+
+[SQL: 
+DROP TABLE team_details]
+(Background on this error at: https://sqlalche.me/e/14/2j85)
+[2025-09-25T10:32:05.740+0000] {python.py:194} INFO - Done. Returned value was: None
+[2025-09-25T10:32:05.742+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=football_etl, task_id=transform_team_details_to_silver, execution_date=20250925T102705, start_date=20250925T103205, end_date=20250925T103205
+[2025-09-25T10:32:05.787+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
+[2025-09-25T10:32:05.798+0000] {taskinstance.py:2778} INFO - 1 downstream tasks scheduled from follow-on schedule check

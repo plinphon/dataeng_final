@@ -1,0 +1,12 @@
+[2025-09-25T10:16:13.209+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: football_etl.transform_team_details_to_silver manual__2025-09-25T10:11:09.035724+00:00 [queued]>
+[2025-09-25T10:16:13.211+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: football_etl.transform_team_details_to_silver manual__2025-09-25T10:11:09.035724+00:00 [queued]>
+[2025-09-25T10:16:13.211+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-09-25T10:16:13.216+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): transform_team_details_to_silver> on 2025-09-25 10:11:09.035724+00:00
+[2025-09-25T10:16:13.220+0000] {standard_task_runner.py:57} INFO - Started process 798 to run task
+[2025-09-25T10:16:13.222+0000] {standard_task_runner.py:84} INFO - Running: ['airflow', 'tasks', 'run', 'football_etl', 'transform_team_details_to_silver', 'manual__2025-09-25T10:11:09.035724+00:00', '--job-id', '55', '--raw', '--subdir', 'DAGS_FOLDER/fetch _player_stats.py', '--cfg-path', '/tmp/tmpydjmn7kf']
+[2025-09-25T10:16:13.223+0000] {standard_task_runner.py:85} INFO - Job 55: Subtask transform_team_details_to_silver
+[2025-09-25T10:16:13.237+0000] {task_command.py:416} INFO - Running <TaskInstance: football_etl.transform_team_details_to_silver manual__2025-09-25T10:11:09.035724+00:00 [running]> on host 1afec62875aa
+[2025-09-25T10:16:13.259+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='data_eng' AIRFLOW_CTX_DAG_ID='football_etl' AIRFLOW_CTX_TASK_ID='transform_team_details_to_silver' AIRFLOW_CTX_EXECUTION_DATE='2025-09-25T10:11:09.035724+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-09-25T10:11:09.035724+00:00'
+[2025-09-25T10:16:13.274+0000] {python.py:194} INFO - Done. Returned value was: None
+[2025-09-25T10:16:13.276+0000] {taskinstance.py:1400} INFO - Marking task as SUCCESS. dag_id=football_etl, task_id=transform_team_details_to_silver, execution_date=20250925T101109, start_date=20250925T101613, end_date=20250925T101613
+[2025-09-25T10:16:13.318+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 0
