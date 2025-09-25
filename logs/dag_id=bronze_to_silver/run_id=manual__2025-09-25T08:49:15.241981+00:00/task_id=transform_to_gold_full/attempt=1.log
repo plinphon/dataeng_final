@@ -1,0 +1,93 @@
+[2025-09-25T08:50:27.686+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: bronze_to_silver.transform_to_gold_full manual__2025-09-25T08:49:15.241981+00:00 [queued]>
+[2025-09-25T08:50:27.689+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: bronze_to_silver.transform_to_gold_full manual__2025-09-25T08:49:15.241981+00:00 [queued]>
+[2025-09-25T08:50:27.689+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-09-25T08:50:27.693+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): transform_to_gold_full> on 2025-09-25 08:49:15.241981+00:00
+[2025-09-25T08:50:27.696+0000] {standard_task_runner.py:57} INFO - Started process 134 to run task
+[2025-09-25T08:50:27.697+0000] {standard_task_runner.py:84} INFO - Running: ['airflow', 'tasks', 'run', 'bronze_to_silver', 'transform_to_gold_full', 'manual__2025-09-25T08:49:15.241981+00:00', '--job-id', '30', '--raw', '--subdir', 'DAGS_FOLDER/fetch _player_stats.py', '--cfg-path', '/tmp/tmprvp46v8h']
+[2025-09-25T08:50:27.698+0000] {standard_task_runner.py:85} INFO - Job 30: Subtask transform_to_gold_full
+[2025-09-25T08:50:27.712+0000] {task_command.py:416} INFO - Running <TaskInstance: bronze_to_silver.transform_to_gold_full manual__2025-09-25T08:49:15.241981+00:00 [running]> on host 1afec62875aa
+[2025-09-25T08:50:27.733+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='data_eng' AIRFLOW_CTX_DAG_ID='bronze_to_silver' AIRFLOW_CTX_TASK_ID='transform_to_gold_full' AIRFLOW_CTX_EXECUTION_DATE='2025-09-25T08:49:15.241981+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-09-25T08:49:15.241981+00:00'
+[2025-09-25T08:50:27.755+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.DependentObjectsStillExist: cannot drop table player_stats_gold because other objects depend on it
+DETAIL:  view top_scorers depends on table player_stats_gold
+view top_assisters depends on table player_stats_gold
+view disciplined_players depends on table player_stats_gold
+view top_pass_accuracy depends on table player_stats_gold
+view team_aggregates depends on table player_stats_gold
+HINT:  Use DROP ... CASCADE to drop the dependent objects too.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/fetch _player_stats.py", line 116, in transform_silver_to_gold_full
+    df[gold_columns].to_sql("player_stats_gold", engine, if_exists="replace", index=False)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/core/generic.py", line 2878, in to_sql
+    return sql.to_sql(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 769, in to_sql
+    return pandas_sql.to_sql(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1910, in to_sql
+    table = self.prep_table(
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1814, in prep_table
+    table.create()
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 907, in create
+    self.pd_sql.drop_table(self.name, self.schema)
+  File "/home/airflow/.local/lib/python3.8/site-packages/pandas/io/sql.py", line 1963, in drop_table
+    self.get_table(table_name, schema).drop(bind=self.con)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/sql/schema.py", line 979, in drop
+    bind._run_ddl_visitor(ddl.SchemaDropper, self, checkfirst=checkfirst)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 2221, in _run_ddl_visitor
+    visitorcallable(self.dialect, self, **kwargs).traverse_single(element)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/sql/visitors.py", line 524, in traverse_single
+    return meth(obj, **kw)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/sql/ddl.py", line 1106, in visit_table
+    self.connection.execute(DropTable(table))
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/sql/ddl.py", line 80, in _execute_on_connection
+    return connection._execute_ddl(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1477, in _execute_ddl
+    ret = self._execute_context(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.InternalError: (psycopg2.errors.DependentObjectsStillExist) cannot drop table player_stats_gold because other objects depend on it
+DETAIL:  view top_scorers depends on table player_stats_gold
+view top_assisters depends on table player_stats_gold
+view disciplined_players depends on table player_stats_gold
+view top_pass_accuracy depends on table player_stats_gold
+view team_aggregates depends on table player_stats_gold
+HINT:  Use DROP ... CASCADE to drop the dependent objects too.
+
+[SQL: 
+DROP TABLE player_stats_gold]
+(Background on this error at: https://sqlalche.me/e/14/2j85)
+[2025-09-25T08:50:27.761+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=bronze_to_silver, task_id=transform_to_gold_full, execution_date=20250925T084915, start_date=20250925T085027, end_date=20250925T085027
+[2025-09-25T08:50:27.765+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 30 for task transform_to_gold_full ((psycopg2.errors.DependentObjectsStillExist) cannot drop table player_stats_gold because other objects depend on it
+DETAIL:  view top_scorers depends on table player_stats_gold
+view top_assisters depends on table player_stats_gold
+view disciplined_players depends on table player_stats_gold
+view top_pass_accuracy depends on table player_stats_gold
+view team_aggregates depends on table player_stats_gold
+HINT:  Use DROP ... CASCADE to drop the dependent objects too.
+
+[SQL: 
+DROP TABLE player_stats_gold]
+(Background on this error at: https://sqlalche.me/e/14/2j85); 134)
+[2025-09-25T08:50:27.795+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1

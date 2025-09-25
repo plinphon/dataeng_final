@@ -1,0 +1,23 @@
+version: "3.8"
+services:
+  airflow:
+    image: apache/airflow:2.7.3
+    restart: always
+    environment:
+      AIRFLOW__CORE__LOAD_EXAMPLES: "false"
+      AIRFLOW__CORE__EXECUTOR: "SequentialExecutor"
+      AIRFLOW__CORE__FERNET_KEY: "mYbJtH1r1ZsXx7r0g7u1P6ZzFqQw9eK0aV5hLk2TnUc="
+      AIRFLOW__CORE__DAGS_ARE_PAUSED_AT_CREATION: "true"
+      AIRFLOW__CORE__ENABLE_XCOM_PICKLING: "true"
+    volumes:
+      - ./dags:/opt/airflow/dags
+      - ./logs:/opt/airflow/logs
+      - ./plugins:/opt/airflow/plugins
+    ports:
+      - "8080:8080"
+    command: >
+      bash -c "
+      airflow db init &&
+      airflow users create --username admin --password admin --firstname Admin --lastname Admin --role Admin --email admin@example.com &&
+      airflow webserver &
+      airflow scheduler"

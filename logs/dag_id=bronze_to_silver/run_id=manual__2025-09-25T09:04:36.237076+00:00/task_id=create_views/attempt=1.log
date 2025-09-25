@@ -1,0 +1,91 @@
+[2025-09-25T09:04:47.618+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: bronze_to_silver.create_views manual__2025-09-25T09:04:36.237076+00:00 [queued]>
+[2025-09-25T09:04:47.621+0000] {taskinstance.py:1159} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: bronze_to_silver.create_views manual__2025-09-25T09:04:36.237076+00:00 [queued]>
+[2025-09-25T09:04:47.621+0000] {taskinstance.py:1361} INFO - Starting attempt 1 of 2
+[2025-09-25T09:04:47.626+0000] {taskinstance.py:1382} INFO - Executing <Task(PythonOperator): create_views> on 2025-09-25 09:04:36.237076+00:00
+[2025-09-25T09:04:47.629+0000] {standard_task_runner.py:57} INFO - Started process 428 to run task
+[2025-09-25T09:04:47.632+0000] {standard_task_runner.py:84} INFO - Running: ['airflow', 'tasks', 'run', 'bronze_to_silver', 'create_views', 'manual__2025-09-25T09:04:36.237076+00:00', '--job-id', '48', '--raw', '--subdir', 'DAGS_FOLDER/fetch _player_stats.py', '--cfg-path', '/tmp/tmpk3oeu0df']
+[2025-09-25T09:04:47.632+0000] {standard_task_runner.py:85} INFO - Job 48: Subtask create_views
+[2025-09-25T09:04:47.647+0000] {task_command.py:416} INFO - Running <TaskInstance: bronze_to_silver.create_views manual__2025-09-25T09:04:36.237076+00:00 [running]> on host 1afec62875aa
+[2025-09-25T09:04:47.673+0000] {taskinstance.py:1662} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='data_eng' AIRFLOW_CTX_DAG_ID='bronze_to_silver' AIRFLOW_CTX_TASK_ID='create_views' AIRFLOW_CTX_EXECUTION_DATE='2025-09-25T09:04:36.237076+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-09-25T09:04:36.237076+00:00'
+[2025-09-25T09:04:47.683+0000] {taskinstance.py:1937} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.WrongObjectType: "team_aggregates" is not a table
+HINT:  Use DROP VIEW to remove a view.
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 192, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 209, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/create_view.py", line 60, in create_views
+    conn.execute(q)
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1370, in execute
+    return self._exec_driver_sql(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1674, in _exec_driver_sql
+    ret = self._execute_context(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/home/airflow/.local/lib/python3.8/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.WrongObjectType) "team_aggregates" is not a table
+HINT:  Use DROP VIEW to remove a view.
+
+[SQL: 
+        DROP TABLE IF EXISTS team_aggregates;
+        CREATE TABLE team_aggregates AS
+        SELECT 
+            team_name,
+            season_id,
+            SUM(goals) AS total_goals,
+            SUM(assists) AS total_assists,
+            SUM(appearances) AS total_appearances,
+            AVG(passes_accuracy_percent) AS avg_pass_accuracy,
+            SUM(yellow_cards) AS total_yellow,
+            SUM(red_cards) AS total_red,
+            SUM(tackles) AS total_tackles,
+            SUM(interceptions) AS total_interceptions,
+            SUM(fouls) AS total_fouls
+        FROM player_stats_gold
+        GROUP BY team_name, season_id
+        ORDER BY total_goals DESC;
+        ]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+[2025-09-25T09:04:47.686+0000] {taskinstance.py:1400} INFO - Marking task as UP_FOR_RETRY. dag_id=bronze_to_silver, task_id=create_views, execution_date=20250925T090436, start_date=20250925T090447, end_date=20250925T090447
+[2025-09-25T09:04:47.691+0000] {standard_task_runner.py:104} ERROR - Failed to execute job 48 for task create_views ((psycopg2.errors.WrongObjectType) "team_aggregates" is not a table
+HINT:  Use DROP VIEW to remove a view.
+
+[SQL: 
+        DROP TABLE IF EXISTS team_aggregates;
+        CREATE TABLE team_aggregates AS
+        SELECT 
+            team_name,
+            season_id,
+            SUM(goals) AS total_goals,
+            SUM(assists) AS total_assists,
+            SUM(appearances) AS total_appearances,
+            AVG(passes_accuracy_percent) AS avg_pass_accuracy,
+            SUM(yellow_cards) AS total_yellow,
+            SUM(red_cards) AS total_red,
+            SUM(tackles) AS total_tackles,
+            SUM(interceptions) AS total_interceptions,
+            SUM(fouls) AS total_fouls
+        FROM player_stats_gold
+        GROUP BY team_name, season_id
+        ORDER BY total_goals DESC;
+        ]
+(Background on this error at: https://sqlalche.me/e/14/f405); 428)
+[2025-09-25T09:04:47.738+0000] {local_task_job_runner.py:228} INFO - Task exited with return code 1
+[2025-09-25T09:04:47.744+0000] {taskinstance.py:2778} INFO - 0 downstream tasks scheduled from follow-on schedule check
