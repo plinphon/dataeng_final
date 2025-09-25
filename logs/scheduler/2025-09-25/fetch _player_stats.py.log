@@ -4252,3 +4252,38 @@ NameError: name 'transform_silver_to_gold_full' is not defined
 [2025-09-25T12:24:54.634+0000] {logging_mixin.py:154} INFO - [2025-09-25T12:24:54.634+0000] {dag.py:2941} INFO - Sync 1 DAGs
 [2025-09-25T12:24:54.644+0000] {logging_mixin.py:154} INFO - [2025-09-25T12:24:54.644+0000] {dag.py:3722} INFO - Setting next_dagrun for football_complete_etl to 2025-09-25T00:00:00+00:00, run_after=2025-09-26T00:00:00+00:00
 [2025-09-25T12:24:54.656+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/fetch _player_stats.py took 0.323 seconds
+[2025-09-25T12:25:24.877+0000] {processor.py:157} INFO - Started process (PID=522) to work on /opt/airflow/dags/fetch _player_stats.py
+[2025-09-25T12:25:24.879+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/fetch _player_stats.py for tasks to queue
+[2025-09-25T12:25:24.880+0000] {logging_mixin.py:154} INFO - [2025-09-25T12:25:24.879+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/fetch _player_stats.py
+[2025-09-25T12:25:25.104+0000] {processor.py:839} INFO - DAG(s) dict_keys(['football_complete_etl']) retrieved from /opt/airflow/dags/fetch _player_stats.py
+[2025-09-25T12:25:25.117+0000] {logging_mixin.py:154} INFO - [2025-09-25T12:25:25.117+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2025-09-25T12:25:25.128+0000] {logging_mixin.py:154} INFO - [2025-09-25T12:25:25.128+0000] {dag.py:3722} INFO - Setting next_dagrun for football_complete_etl to 2025-09-25T00:00:00+00:00, run_after=2025-09-26T00:00:00+00:00
+[2025-09-25T12:25:25.139+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/fetch _player_stats.py took 0.272 seconds
+[2025-09-25T12:25:55.270+0000] {processor.py:157} INFO - Started process (PID=524) to work on /opt/airflow/dags/fetch _player_stats.py
+[2025-09-25T12:25:55.272+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/fetch _player_stats.py for tasks to queue
+[2025-09-25T12:25:55.274+0000] {logging_mixin.py:154} INFO - [2025-09-25T12:25:55.273+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/fetch _player_stats.py
+[2025-09-25T12:25:55.510+0000] {processor.py:839} INFO - DAG(s) dict_keys(['football_complete_etl']) retrieved from /opt/airflow/dags/fetch _player_stats.py
+[2025-09-25T12:25:55.528+0000] {logging_mixin.py:154} INFO - [2025-09-25T12:25:55.528+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2025-09-25T12:25:55.539+0000] {logging_mixin.py:154} INFO - [2025-09-25T12:25:55.539+0000] {dag.py:3722} INFO - Setting next_dagrun for football_complete_etl to 2025-09-25T00:00:00+00:00, run_after=2025-09-26T00:00:00+00:00
+[2025-09-25T12:25:55.548+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/fetch _player_stats.py took 0.283 seconds
+[2025-09-25T12:26:25.675+0000] {processor.py:157} INFO - Started process (PID=526) to work on /opt/airflow/dags/fetch _player_stats.py
+[2025-09-25T12:26:25.677+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/fetch _player_stats.py for tasks to queue
+[2025-09-25T12:26:25.678+0000] {logging_mixin.py:154} INFO - [2025-09-25T12:26:25.677+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/fetch _player_stats.py
+[2025-09-25T12:26:25.807+0000] {processor.py:839} INFO - DAG(s) dict_keys(['football_complete_etl']) retrieved from /opt/airflow/dags/fetch _player_stats.py
+[2025-09-25T12:26:25.816+0000] {logging_mixin.py:154} INFO - [2025-09-25T12:26:25.816+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2025-09-25T12:26:25.824+0000] {logging_mixin.py:154} INFO - [2025-09-25T12:26:25.823+0000] {dag.py:3722} INFO - Setting next_dagrun for football_complete_etl to 2025-09-25T00:00:00+00:00, run_after=2025-09-26T00:00:00+00:00
+[2025-09-25T12:26:25.833+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/fetch _player_stats.py took 0.164 seconds
+[2025-09-25T12:26:56.015+0000] {processor.py:157} INFO - Started process (PID=528) to work on /opt/airflow/dags/fetch _player_stats.py
+[2025-09-25T12:26:56.018+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/fetch _player_stats.py for tasks to queue
+[2025-09-25T12:26:56.020+0000] {logging_mixin.py:154} INFO - [2025-09-25T12:26:56.019+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/fetch _player_stats.py
+[2025-09-25T12:26:56.266+0000] {processor.py:839} INFO - DAG(s) dict_keys(['football_complete_etl']) retrieved from /opt/airflow/dags/fetch _player_stats.py
+[2025-09-25T12:26:56.281+0000] {logging_mixin.py:154} INFO - [2025-09-25T12:26:56.281+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2025-09-25T12:26:56.300+0000] {logging_mixin.py:154} INFO - [2025-09-25T12:26:56.300+0000] {dag.py:3722} INFO - Setting next_dagrun for football_complete_etl to 2025-09-25T00:00:00+00:00, run_after=2025-09-26T00:00:00+00:00
+[2025-09-25T12:26:56.331+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/fetch _player_stats.py took 0.326 seconds
+[2025-09-25T12:27:26.580+0000] {processor.py:157} INFO - Started process (PID=530) to work on /opt/airflow/dags/fetch _player_stats.py
+[2025-09-25T12:27:26.584+0000] {processor.py:829} INFO - Processing file /opt/airflow/dags/fetch _player_stats.py for tasks to queue
+[2025-09-25T12:27:26.587+0000] {logging_mixin.py:154} INFO - [2025-09-25T12:27:26.586+0000] {dagbag.py:536} INFO - Filling up the DagBag from /opt/airflow/dags/fetch _player_stats.py
+[2025-09-25T12:27:26.851+0000] {processor.py:839} INFO - DAG(s) dict_keys(['football_complete_etl']) retrieved from /opt/airflow/dags/fetch _player_stats.py
+[2025-09-25T12:27:26.868+0000] {logging_mixin.py:154} INFO - [2025-09-25T12:27:26.868+0000] {dag.py:2941} INFO - Sync 1 DAGs
+[2025-09-25T12:27:26.880+0000] {logging_mixin.py:154} INFO - [2025-09-25T12:27:26.880+0000] {dag.py:3722} INFO - Setting next_dagrun for football_complete_etl to 2025-09-25T00:00:00+00:00, run_after=2025-09-26T00:00:00+00:00
+[2025-09-25T12:27:26.892+0000] {processor.py:179} INFO - Processing /opt/airflow/dags/fetch _player_stats.py took 0.328 seconds
